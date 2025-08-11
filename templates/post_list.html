@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post list</title>
+</head>
+<body>
+    <h1>post list</h1>
+    <ul>
+        {% for post in posts %}
+        <li>
+            <h2>{{post.title}} </h2>
+            <p>{{post.content}} </p>
+            {% comment %} 1:N관계에서 1->N으로 연결되어있는 모든 것을 표시 {% endcomment %}
+            {% comment %} <div>{{post.comment_set.all}} </div> {% endcomment %}
+            {% comment %} ul을 해줘야 명확한 구역 구분이 가능하다 {% endcomment %}
+            <ul>
+                {% for comment in post.comment_set.all %}
+                    <li>{{comment.content}} </li>
+                {% empty %}
+                    <li>아직 댓글이 없습니다.</li>
+                {% endfor %}
+            </ul>
+            
+        </li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
