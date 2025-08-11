@@ -19,8 +19,21 @@ from django.urls import path
 from whale.views import index
 from blog.views import post_list
 
+# 아래 2줄은 media 파일을 보기위한 링크를 추가해 주기 위하여 중요하다.
+# 사실상 메인프로젝트의 settings.py에 설정된 것을 가져오는 것
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index),
     path("posts/", post_list)
 ]
+
+# media를 추가 하기 위한 세팅
+urlpatterns += static(
+    # url의 접두어가 media_url일때는 정적 파일을 돌려준다.
+    prefix=settings.MEDIA_URL,
+    # 돌려줄디렉토리는 MEDIA_ROOT를 기준으로 해준다는 것
+    document_root= settings.MEDIA_ROOT   
+)
