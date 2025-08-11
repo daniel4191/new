@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="navbar">
+        {% if post.thumbnail %}
+            <img src="{{post.thumbnail.url}}" alt="">
+        {% endif %}
+        <span>{{post.title}}</span>
+    </div>
+    <div id="post-detail">
+        <p>{{post.content|linebreaks}} </p>
+
+        {% comment %} 댓글은 1:N이기 때문에 단발성이 아니다. 따라서 for문으로 활용해야함 {% endcomment %}
+        {% for comment in post.comment_set.all %}
+            <li class="comment">{{comment.content}}</li>
+        {% empty %}
+            <li class="comment-empty">아직 댓글이 없습니다.</li>
+        {% endfor %}
+    </div>
+</body>
+</html>
