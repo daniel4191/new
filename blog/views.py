@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from blog.models import Post
 
 # Create your views here.
@@ -22,3 +22,17 @@ def post_detail(request, post_id):
         "post": post
     }
     return render(request, "post_detail.html", context)
+
+def post_add(request):
+    # html로 넘어온 form의 POST 확인 프린트
+    # print(request.POST)
+    if request.method == "POST":
+        print("method POST")
+        title = request.POST['title']
+        content = request.POST['content']
+        post= Post.objects.create(
+            title=title,
+            content=content
+        )
+        return redirect(f"/posts/{post.id}/") # 생성된 post id값
+    return render(request, "post_add.html")

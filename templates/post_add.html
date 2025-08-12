@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="navbar">
+        <span>글 작성</span>
+    </div>
+    <div id="post-add">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="">제목</label>
+                <input type="text" name="title">
+            </div>
+            <div>
+                <label for="">내용</label>
+                <textarea name="content" id=""></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">작성</button>
+        </form>
+    </div>    
+</body>
+</html>

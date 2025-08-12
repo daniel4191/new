@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from whale.views import index
-from blog.views import post_list, post_detail
+from blog.views import post_list, post_detail, post_add
 
 # 아래 2줄은 media 파일을 보기위한 링크를 추가해 주기 위하여 중요하다.
 # 사실상 메인프로젝트의 settings.py에 설정된 것을 가져오는 것
@@ -29,7 +29,8 @@ urlpatterns = [
     path("", index),
     path("posts/", post_list),
     # 특히 이 표현이 중요하다. 각 id값에 맞는 링크 설정
-    path("posts/<int:post_id>/", post_detail)
+    path("posts/<int:post_id>/", post_detail),
+    path("posts/add/", post_add)
 ]
 
 # media를 추가 하기 위한 세팅
